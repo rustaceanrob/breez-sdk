@@ -269,12 +269,8 @@ fn prepend_if_missing(prefix: &str, input: &str) -> String {
 fn ln_address_decode(ln_address: &str) -> Result<(String, String)> {
     if ln_address.contains('@') {
         let split = ln_address.split('@').collect::<Vec<&str>>();
-        let user = split[0];
+        let user = split[0].to_lowercase();
         let domain = split[1];
-
-        if user.to_lowercase() != user {
-            return Err(anyhow!("Invalid username"));
-        }
 
         if !user
             .chars()
